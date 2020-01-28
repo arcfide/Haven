@@ -1,46 +1,32 @@
-<style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
+<script>
+  import Banner from "../components/Banner.svelte";
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
-</style>
+  let title = "The APL Haven";
+  let subtitle = "Your happy place for all things Dyalog APL";
+</script>
 
 <svelte:head>
-	<title>Sapper project template</title>
+  <title>{title}</title>
 </svelte:head>
 
-<h1>Great success!</h1>
-
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<Banner img="/images/library.jpg" alt="Picture of multi-level library stacks">
+  <h1>{title}</h1>
+  <p class="major">{subtitle}</p>
+  <ul class="actions stacked fit" />
+  <form method="get" action="search">
+    <div class="fields">
+      <div class="field">
+        <input type="text" name="terms" id="terms" value="" />
+      </div>
+    </div>
+    <ul class="actions fit small">
+      <li><a href="#intro" class="button fit small smooth-scroll-middle">Get Started</a></li>
+      <li><a href="#domains" class="button fit small smooth-scroll-middle">Browse by Domain</a></li>
+      <li />
+      <li>
+        <input type="submit" name="submit" id="submit" value="Search"
+               class="primary button fit small" />
+      </li>
+    </ul>
+  </form>
+</Banner>

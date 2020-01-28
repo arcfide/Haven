@@ -1,22 +1,14 @@
-<script>
-	import Nav from '../components/Nav.svelte';
+<slot />
 
-	export let segment;
-</script>
-
-<style>
-	main {
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-</style>
-
-<Nav {segment}/>
-
-<main>
-	<slot></slot>
-</main>
+<footer class="wrapper style1 align-center">
+  <div class="inner">
+    <ul class="icons">
+      <li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+      <li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+      <li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+      <li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+      <li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+    </ul>
+    <p>&copy; 2020 Aaron W. Hsu. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+  </div>
+</footer>
