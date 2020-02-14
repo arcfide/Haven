@@ -20,11 +20,9 @@
   <p class="major">Your happy place for all things Dyalog APL</p>
   <ul class="actions stacked fit" />
   <form method="get" action="search">
-    <div class="fields">
-      <div class="field">
-        <input type="text" name="terms" id="terms" value="" />
-      </div>
-    </div>
+    <Fields>
+      <InputField type="text" id="terms" />
+    </Fields>
     <ul class="actions fit small">
       <li><a href="#onestop" class="button fit small smooth-scroll-middle">Get Started</a></li>
       <li><a href="#domains" class="button fit small smooth-scroll-middle">Browse by Domain</a></li>

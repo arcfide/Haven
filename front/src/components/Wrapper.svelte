@@ -1,11 +1,12 @@
 <script>
 	export let id;
 	export let title;
+	export let style = "style1 align-center";
 </script>
 
-<section class="wrapper style1 align-center" {id}>
+<section class="wrapper {style}" {id}>
   <div class="inner">
-    <h2>{title}</h2>
+    {#if title}<h2>{title}</h2>{/if}
     <slot />
   </div>
 </section>

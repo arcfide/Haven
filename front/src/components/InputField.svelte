@@ -3,9 +3,10 @@
   export let type = "text";
   export let label;
   export let id;
+  export let value = "";
 </script>
 
 <div class="field {size}">
-  <label for="{id}">{label}</label>
-  <input {type} name="{id}" {id} value="" />
+  {#if label}<label for="{id}">{label}</label>{/if}
+  <input {type} name="{id}" {id} {value} />
 </div>
