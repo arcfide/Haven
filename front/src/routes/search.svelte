@@ -14,7 +14,7 @@
 
 <script context="module">
   export async function preload(page, session) {
-    let pages = [];
+    let pages;
 
     if (page.query.terms) {
       const terms = page.query.terms.replace(/\+/g, " ");
@@ -47,8 +47,16 @@
   </section>
 </div>
 
-<Wrapper>
-  We found these results.
-  {pages}
+<Wrapper style="style1 align-left">
+  {#if !pages}No search terms provided.
+  {:else if pages.length == 0}No search results found.
+  {:else}
+    <dl>
+      {#each pages as page}
+        <dt><a href="/topics/{page[0]}">{page[1]}</a></dt>
+        <dd><p>{page[2]}</p></dd>
+      {/each}
+    </dl>
+  {/if}
 </Wrapper>
     
