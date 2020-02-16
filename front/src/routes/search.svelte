@@ -53,7 +53,7 @@
   {:else}
     <dl>
       {#each pages as page}
-        <dt><a href="/topics/{page[0]}">{page[1]}</a></dt>
+        <dt><a rel="prefetch" href="topic/{page[0]}">{page[1]}</a></dt>
         <dd><p>{page[2]}</p></dd>
       {/each}
     </dl>
