@@ -44,6 +44,6 @@
   </section>
 </div>
 
-<Wrapper title="{topic[0]}">
+<Wrapper title="{topic[0]}" style="style1">
   {@html topic[1]}
 </Wrapper>
