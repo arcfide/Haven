@@ -90,7 +90,7 @@
       We're in-memory, on-chip, and persistent.
     </GridItem>
     <GridItem title="Dyalog Docs" href="guides/dyalog_docs">
-      The traditional organization for Dyalog Documentation
+      The traditional organization for Dyalog Documentation.
     </GridItem>
     <GridItem title="Computer Science" href="guides/computer_science">
       Understanding APL as a computer scientist.
