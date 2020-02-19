@@ -3,26 +3,22 @@
 
 ∇ BUILD
  LOAD∆CONFIG
- #.Haven.BUILD∆FLARE
+ #.Crawler.BUILD∆FLARE
  #.(TOPICS←FLARETOPICS)
- #.(IDX∆TERMS IDX∆DOCS)←#.(Haven.build∆idx TOPICS)
+ #.(IDX∆TERMS IDX∆DOCS)←#.(Search.build∆idx TOPICS)
  ⎕SE.SALT.Load JARVIS,'Source\Jarvis -target=#'
-∇
-
-∇ CLEAN
- ⎕EX'TOPICS' 'FLARETOPICS' 'IDX∆TERMS' 'IDX∆DOCS' 'Jarvis' 'Conga' 'DRC' 'HttpCommand' 'srv'
 ∇
 
 ∇ LAUNCH
  #.srv←⎕NEW #.Jarvis
- #.srv.CodeLocation←#.Haven.server
+ #.srv.CodeLocation←#.Server
  #.srv.Start
 ∇
 
 ∇ LOAD∆CONFIG
- ⎕SE.SALT.Load '.\Haven.dyalog -target=#'
  CONFIG←(1↓⎕XML⊃⎕NGET'.\config.xml')[;1 2]
  DOCROOT JARVIS←CONFIG[;1][CONFIG[;0]⍳'docroot' 'jarvis']
+ #.DOCROOT←DOCROOT
 ∇
 
 :EndNamespace 

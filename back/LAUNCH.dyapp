@@ -1,4 +1,7 @@
 Target #
 Load .\Make
+Load .\Search
+Load .\Crawler
+Load .\Server
 Run Make.BUILD
 Run Make.LAUNCH
