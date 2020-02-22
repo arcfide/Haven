@@ -13,11 +13,11 @@
  summary←{320↑⊃{⍺,' ',⍵}⌿⍵[;2]~⊂''}
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
 
-∇ BUILD∆FLARE;topics;dirs
+∇ topics←BUILD∆FLARE store;topics;dirs
  dirs←'DotNet' 'GUI' 'InterfaceGuide' 'Language' 'MiscPages' 'UNIX_IUG' 'UserGuide'
  dirs←(#.DOCROOT,'17.1\apl_core_release_specific\Core\Content\')∘,¨dirs,¨'\'
  topics←topics,⍪{⎕XML⊃⎕NGET ⍵}¨topics←⊃⍪/walk¨dirs,¨⊂'*.htm'
- #.FLARETOPICS←⊃⍪⌿parse∆flare/topics
+ (topics←⊃⍪⌿parse∆flare/topics)⎕FREPLACE store 1
 ∇
 
 :EndNamespace 

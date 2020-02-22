@@ -1,4 +1,5 @@
 <config>
   <docroot>C:\Users\arcfi\OneDrive\Documents\Haven\docs\</docroot>
   <jarvis>C:\Users\arcfi\OneDrive\Documents\Jarvis\</jarvis>
+  <datastore>.\data</datastore>
 </config>

@@ -1,14 +1,22 @@
 ﻿:Namespace Make
 (⎕IO ⎕ML ⎕WX)←0 1 3
 
-∇ BUILD
+∇ CRAWL;tie;topics
  LOAD∆CONFIG
- #.Crawler.BUILD∆FLARE
- #.(TOPICS←FLARETOPICS)
- #.(IDX∆TERMS IDX∆DOCS)←#.(Search.build∆idx TOPICS)
+ ⎕←'Initializing store...'
+ tie←#.Search.INIT∆STORE STORE
+ ⎕←'Crawling documentation...'
+ topics←#.Crawler.BUILD∆FLARE tie
+ ⎕←'Building search index...'
+ tie #.Search.BUILD∆IDX topics
+ ⎕←'Done. Cleaning up and exiting...'
+ ⎕FUNTIE tie
+ ⎕OFF
 ∇
 
 ∇ LAUNCH
+ LOAD∆CONFIG
+ #.Search.LOAD∆STORE STORE
  ⎕SE.SALT.Load JARVIS,'Source\Jarvis -target=#'
  #.srv←⎕NEW #.Jarvis
  #.srv.CodeLocation←#.Server
@@ -17,7 +25,7 @@
 
 ∇ LOAD∆CONFIG
  CONFIG←(1↓⎕XML⊃⎕NGET'.\config.xml')[;1 2]
- DOCROOT JARVIS←CONFIG[;1][CONFIG[;0]⍳'docroot' 'jarvis']
+ DOCROOT JARVIS STORE←CONFIG[;1][CONFIG[;0]⍳'docroot' 'jarvis' 'datastore']
  #.DOCROOT←DOCROOT
 ∇
 
