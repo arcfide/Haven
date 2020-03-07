@@ -7,6 +7,8 @@
  tie←#.Search.INIT∆STORE STORE
  ⎕←'Crawling documentation...'
  topics←#.Crawler.BUILD∆FLARE tie
+ ⎕←'Crawling quick reference...'
+ topics⍪←#.Crawler.BUILD∆QUICKREF tie
  ⎕←'Building search index...'
  tie #.Search.BUILD∆IDX topics
  ⎕←'Done. Cleaning up and exiting...'

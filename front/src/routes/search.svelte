@@ -54,7 +54,7 @@
     <dl>
       {#each pages as page}
         <dt><a rel="prefetch" href="topic/{page[0]}">{page[1]}</a></dt>
-        <dd><p>{page[2]}</p></dd>
+        <dd>{@html page[2]}</dd>
       {/each}
     </dl>
   {/if}

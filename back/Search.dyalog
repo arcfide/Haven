@@ -6,9 +6,10 @@
 
 ∇ tie←INIT∆STORE store
   tie←store ⎕FCREATE 0
-  ⍬⎕FAPPEND tie ⍝ 0: Topics
-  ⍬⎕FAPPEND tie ⍝ 1: Index Terms
-  ⍬⎕FAPPEND tie ⍝ 2: Index Docs
+  (0 4⍴⍬)⎕FAPPEND tie ⍝ 1: Topics
+  ⍬⎕FAPPEND tie ⍝ 2: Index Terms
+  ⍬⎕FAPPEND tie ⍝ 3: Index Docs
+  ⍬⎕FAPPEND tie ⍝ 4: Quick References
 ∇
 
 ∇ store BUILD∆IDX topics;kw;ks;ti
