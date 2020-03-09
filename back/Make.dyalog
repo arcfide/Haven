@@ -6,15 +6,15 @@
  ⎕←'Initializing store...'
  ⎕←'tie←#.Search.INIT∆STORE STORE'
  tie←#.Search.INIT∆STORE STORE
- ⎕←'Crawling documentation...'
- ⎕←'topics←#.Crawler.BUILD∆FLARE tie'
- topics←#.Crawler.BUILD∆FLARE tie
  ⎕←'Crawling quick reference...'
  ⎕←'topics⍪←#.Crawler.BUILD∆QUICKREF tie'
- topics⍪←#.Crawler.BUILD∆QUICKREF tie
+ topics←#.Crawler.BUILD∆QUICKREF tie
  ⎕←'Building APLCart...'
  ⎕←'topics⍪←#.Crawler.BUILD∆APLCART tie'
  topics⍪←#.Crawler.BUILD∆APLCART tie
+ ⎕←'Crawling documentation...'
+ ⎕←'topics←#.Crawler.BUILD∆FLARE tie'
+ topics⍪←#.Crawler.BUILD∆FLARE tie
  ⎕←'There are',(≢topics),'topics.'
  ⎕←'Building search index...'
  ⎕←'tie #.Search.BUILD∆IDX topics'
