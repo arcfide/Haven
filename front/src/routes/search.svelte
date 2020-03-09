@@ -29,6 +29,33 @@
   }
 </script>
 
+<style>
+  article {
+    margin-bottom: 1rem;
+  }
+
+  article header {
+    display: flex;
+    flex-flow: rows wrap;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    border-bottom: 1px solid;
+  }
+
+  article :global(h3), article :global(p), article :global(pre) {
+    padding: 0;
+    margin: 0;
+  }
+
+  :global(.aplcart) .atype {
+    color: rgb(0, 0, 255);
+  }
+
+  :global(.quickref) .atype {
+    color: rgb(255, 0, 0);
+  }
+</style>
+
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
@@ -51,12 +78,19 @@
   {#if !pages}No search terms provided.
   {:else if pages.length == 0}No search results found.
   {:else}
-    <dl>
-      {#each pages as page}
-        <dt><a rel="prefetch" href="topic/{page[0]}">{@html page[1]}</a></dt>
-        <dd>{@html page[2]}</dd>
-      {/each}
-    </dl>
+    {#each pages as page}
+      <article class="{page[3]}">
+        <header>
+          <h3><a ref="prefetch" href="topic/{page[0]}">{@html page[1]}</a></h3>
+          <div class="atype">
+           {#if page[3] === 'aplcart'}Idiom{/if}
+           {#if page[3] === 'quickref'}Quick Reference{/if}
+           {#if page[3] === 'doc'}Official Documentation{/if}
+          </div>
+        </header>
+        {@html page[2]}
+      </article>
+    {/each}
   {/if}
 </Wrapper>
     

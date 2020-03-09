@@ -3,13 +3,13 @@
 
 ∇ tie←INIT∆STORE store
   tie←store ⎕FCREATE 0
-  (0 5⍴⍬)⎕FAPPEND tie ⍝ 1: Topics
+  (0 6⍴⍬)⎕FAPPEND tie ⍝ 1: Topics
   ⍬⎕FAPPEND tie ⍝ 2: Index Terms
   ⍬⎕FAPPEND tie ⍝ 3: Index Docs
 ∇
 
 ∇ store BUILD∆IDX topics;kw;ks;ti
-  ti←(⊂⍬)⍴⍨≢ks←∪{⍵[⍋⍵]}⊃⍪⌿kw←topics[;4]
+  ti←(⊂⍬)⍴⍨≢ks←∪{⍵[⍋⍵]}⊃⍪⌿kw←topics[;5]
   kw(ks∘⍳){ti[⍺⍺ ⍺],←⍵}¨⍳≢kw
   ks ⎕FREPLACE store 2
   ti ⎕FREPLACE store 3
