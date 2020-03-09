@@ -5,7 +5,7 @@
  flare∆body←{⍉(⊢-⊃)@0⍉⍵↓⍨⍵[;1]⍳⊂'body'}
  flare∆heading←{⊃{⍺,' ',⍵}⌿(⍵ subtree 1+⍵[;1]⍳⊂'body')[;2]~⊂''}
  fst∆node←{⍵[1+⍵[;1]⍳⊂'body';]}
- keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase tree∆txt ⍵)∊⎕A,''''}
+ keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
  strip∆fst←{(1↑⍵)⍪{⍵⌿⍨~1,∧⍀1↓⍵[;0]>⊃⍵}1↓⍵}
  subtree←{⍺⌿⍨⍵=(⍸⍺[⍵;0]≥⍺[;0])⍸⍳≢⍺}
  summary←{'<p>',(320↑⊃{⍺,' ',⍵}⌿⍵[;2]~⊂''),'</p>'}
@@ -14,8 +14,8 @@
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
 
  parse∆flare←{good←'h2' 'h3' 'h4' 'div' 'tbl'
-   body←flare∆body ⍵ ⋄ keys←keywords ⍵
-   (fst∆node ⍵)[1]∊good:⍉⍪(doc∆path ⍺)(flare∆heading ⍵)(summary body)(strip∆fst body)(keywords ⍵)
+   body←flare∆body ⍵ ⋄ keys←keywords tree∆txt ⍵ ⋄ path←doc∆path ⍺
+   (fst∆node ⍵)[1]∊good:⍉⍪path(flare∆heading ⍵)(summary body)(strip∆fst body)keys
    0 5⍴⊂''}
 
 ∇ topics←BUILD∆FLARE store;topics;dirs
@@ -31,7 +31,18 @@
   heads←{⊃{⍺,' ',⍵}⌿(⍵ subtree ⍵[;1]⍳⊂'head')[;2]}¨data
   bodies←flare∆body¨data
   summaries←{'<pre>',(2⊃fst∆node ⍵),'</pre>'}¨bodies
-  topics←(doc∆path¨files),heads,summaries,bodies,⍪keywords¨data
+  topics←(doc∆path¨files),heads,summaries,bodies,⍪keywords∘tree∆txt¨data
+  (topics⍪⍨⎕FREAD store 1)⎕FREPLACE store 1
+∇
+
+∇ topics←BUILD∆APLCART store;path;data;heads;summs;bods;keys
+  path←#.DOCROOT,'aplcart\table.tsv'
+  data←1↓⎕CSV⍠'Separator'(⎕UCS 9)⍠'QuoteChar' ''⊂path
+  heads←'<pre>'∘,¨data[;0],¨⊂'</pre>'
+  summs←'<p>'∘,¨data[;1],¨⊂'</p>'
+  bods←'<body>'∘,¨summs,¨⊂'</body>'
+  keys←keywords¨{⍺,' ',⍵}/data[;0 1 6]
+  topics←({path,':',⍕⍵}¨1+⍳≢data),heads,summs,bods,⍪keys
   (topics⍪⍨⎕FREAD store 1)⎕FREPLACE store 1
 ∇
 

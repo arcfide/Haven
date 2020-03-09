@@ -6,7 +6,7 @@
 
 <section class="wrapper {style}" {id}>
   <div class="inner">
-    {#if title}<h2>{title}</h2>{/if}
+    {#if title}<h2>{@html title}</h2>{/if}
     <slot />
   </div>
 </section>

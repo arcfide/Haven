@@ -12,6 +12,10 @@
  ⎕←'Crawling quick reference...'
  ⎕←'topics⍪←#.Crawler.BUILD∆QUICKREF tie'
  topics⍪←#.Crawler.BUILD∆QUICKREF tie
+ ⎕←'Building APLCart...'
+ ⎕←'topics⍪←#.Crawler.BUILD∆APLCART tie'
+ topics⍪←#.Crawler.BUILD∆APLCART tie
+ ⎕←'There are',(≢topics),'topics.'
  ⎕←'Building search index...'
  ⎕←'tie #.Search.BUILD∆IDX topics'
  tie #.Search.BUILD∆IDX topics
