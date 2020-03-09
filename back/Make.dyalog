@@ -1,15 +1,19 @@
 ﻿:Namespace Make
 (⎕IO ⎕ML ⎕WX)←0 1 3
 
-∇ CRAWL;tie;topics
+∇ CRAWL
  LOAD∆CONFIG
  ⎕←'Initializing store...'
+ ⎕←'tie←#.Search.INIT∆STORE STORE'
  tie←#.Search.INIT∆STORE STORE
  ⎕←'Crawling documentation...'
+ ⎕←'topics←#.Crawler.BUILD∆FLARE tie'
  topics←#.Crawler.BUILD∆FLARE tie
  ⎕←'Crawling quick reference...'
+ ⎕←'topics⍪←#.Crawler.BUILD∆QUICKREF tie'
  topics⍪←#.Crawler.BUILD∆QUICKREF tie
  ⎕←'Building search index...'
+ ⎕←'tie #.Search.BUILD∆IDX topics'
  tie #.Search.BUILD∆IDX topics
  ⎕←'Done. Cleaning up and exiting...'
  ⎕FUNTIE tie
