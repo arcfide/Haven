@@ -1,19 +1,15 @@
 ﻿:Namespace Search
 (⎕IO ⎕ML ⎕WX)←0 1 3
 
- keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
- ucase←{1(819⌶)⍵}
-
 ∇ tie←INIT∆STORE store
   tie←store ⎕FCREATE 0
-  (0 4⍴⍬)⎕FAPPEND tie ⍝ 1: Topics
+  (0 5⍴⍬)⎕FAPPEND tie ⍝ 1: Topics
   ⍬⎕FAPPEND tie ⍝ 2: Index Terms
   ⍬⎕FAPPEND tie ⍝ 3: Index Docs
-  ⍬⎕FAPPEND tie ⍝ 4: Quick References
 ∇
 
 ∇ store BUILD∆IDX topics;kw;ks;ti
-  ti←(⊂⍬)⍴⍨≢ks←∪{⍵[⍋⍵]}⊃⍪⌿kw←keywords¨topics[;1]
+  ti←(⊂⍬)⍴⍨≢ks←∪{⍵[⍋⍵]}⊃⍪⌿kw←topics[;4]
   kw(ks∘⍳){ti[⍺⍺ ⍺],←⍵}¨⍳≢kw
   ks ⎕FREPLACE store 2
   ti ⎕FREPLACE store 3
