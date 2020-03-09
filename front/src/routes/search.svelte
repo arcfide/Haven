@@ -10,14 +10,16 @@
 
   let title = "Search Results - APL Haven";
   export let pages;
+  export let terms;
 </script>
 
 <script context="module">
   export async function preload(page, session) {
     let pages;
+    let terms = '';
 
     if (page.query.terms) {
-      const terms = page.query.terms.replace(/\+/g, " ");
+      terms = page.query.terms.replace(/\+/g, " ");
       const results = await this.fetch("http://localhost:8080/search", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,7 +27,7 @@
       pages = await results.json();
     }
    
-    return { pages };
+    return { pages, terms };
   }
 </script>
 
@@ -66,7 +68,7 @@
     <div class="content">
       <form method="get" action="search">
         <Fields>
-          <InputField size="half" type="text" id="terms" />
+          <InputField size="half" type="text" id="terms" value={terms} />
           <InputField size="quarter align-left" type="submit" id="submit" value="Search" />
         </Fields>
       </form>
