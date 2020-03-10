@@ -4,6 +4,7 @@
  doc∆path←{(≢#.DOCROOT)↓⍵}
  flare∆body←{⍉(⊢-⊃)@0⍉⍵↓⍨⍵[;1]⍳⊂'body'}
  flare∆heading←{⊃{⍺,' ',⍵}⌿(⍵ subtree 1+⍵[;1]⍳⊂'body')[;2]~⊂''}
+ flare∆keywords←{⊃{⍺,' ',⍵}⌿(⊂''),1⌷⍉⊃⍪⌿⍵[;3]⌿⍨⍵[;1]∊⊂'MadCap:keyword'}
  fst∆node←{⍵[1+⍵[;1]⍳⊂'body';]}
  keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
  strip∆fst←{(1↑⍵)⍪{⍵⌿⍨~1,∧⍀1↓⍵[;0]>⊃⍵}1↓⍵}
@@ -15,7 +16,7 @@
  xml∆sanity←{(,¨'&<>')⎕R'\&amp;' '\&lt;' '\&gt;'⊢⍵}
 
  parse∆flare←{good←'h2' 'h3' 'h4' 'div' 'tbl'
-   body←flare∆body ⍵ ⋄ keys←keywords tree∆txt ⍵ ⋄ path←doc∆path ⍺
+   body←flare∆body ⍵ ⋄ keys←keywords(tree∆txt,' ',flare∆keywords)⍵ ⋄ path←doc∆path ⍺
    (fst∆node ⍵)[1]∊good:⍉⍪path(flare∆heading ⍵)(summary body)(strip∆fst body)'doc' keys
    0 6⍴⊂''}
 
