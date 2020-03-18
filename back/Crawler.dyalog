@@ -1,12 +1,14 @@
 ﻿:Namespace Crawler
 (⎕IO ⎕ML ⎕WX)←0 1 3
 
- cleanse∆madcap←{⍵⌿⍨~⍵[;1]∊⊂'MadCap:keyword'}
+ cleanse∆madcap←{mc∆equation mc∆keyword ⍵}
  doc∆path←{(≢#.DOCROOT)↓⍵}
  flare∆body←{cleanse∆madcap ⍉(⊢-⊃)@0⍉⍵↓⍨⍵[;1]⍳⊂'body'}
  flare∆heading←{⊃{⍺,' ',⍵}⌿(⍵ subtree 1+⍵[;1]⍳⊂'body')[;2]~⊂''}
  fst∆node←{⍵[1+⍵[;1]⍳⊂'body';]}
  keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
+ mc∆keyword←{⍵⌿⍨~⍵[;1]∊⊂'MadCap:keyword'}
+ mc∆equation←{w⊣w[(⊂¨i,¨3),¨⊂⊂0 0]←⊂'xmlns'⊣w[i←⍸(w←⍵)[;1]∊⊂'MadCap:equation';1]←⊂'math'}
  strip∆fst←{(1↑⍵)⍪{⍵⌿⍨~1,∧⍀1↓⍵[;0]>⊃⍵}1↓⍵}
  subtree←{⍺⌿⍨⍵=(⍸⍺[⍵;0]≥⍺[;0])⍸⍳≢⍺}
  summary←{'<p>',(320↑⊃{⍺,' ',⍵}⌿⍵[;2]~⊂''),'</p>'}
