@@ -30,7 +30,8 @@
 ∇
 
 ∇ topics←BUILD∆QUICKREF store;files;data;heads;bodies;summaries
-  files←walk #.DOCROOT,'17.1\apl_core_release_specific\Core\Content\Language\Language Bar\*.htm'
+  files←'17.1\apl_core_release_specific\Core\Content\Language\Language Bar\*.htm'
+  files←walk #.DOCROOT,files
   data←{⎕XML⊃⎕NGET ⍵}¨files
   heads←{⊃{⍺,' ',⍵}⌿(⍵ subtree ⍵[;1]⍳⊂'head')[;2]}¨data
   bodies←flare∆body¨data
