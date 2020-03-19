@@ -6,12 +6,14 @@
 -->
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/main.css">
+    <noscript><link rel="stylesheet" href="/css/noscript.css"></noscript>
+    <link rel="stylesheet" href="/css/apl385.css">
     <script src="https://kit.fontawesome.com/79acf8f977.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/apl385.css" />
-    <noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script>
     %sapper.base%
     <link rel='icon' type='image/png' href='favicon.png'>
     %sapper.styles%
@@ -19,6 +21,7 @@
   </head>
   <body class="is-preload">
     <div id="wrapper" class="divided">%sapper.html%</div>
+    %sapper.scripts%
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.scrollex.min.js"></script>
     <script src="/js/jquery.scrolly.min.js"></script>
@@ -26,6 +29,5 @@
     <script src="/js/breakpoints.min.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/main.js"></script>
-    %sapper.scripts%
   </body>
 </html>

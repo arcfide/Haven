@@ -22,8 +22,11 @@
   import Wrapper from "../../components/Wrapper.svelte";
   import Fields from "../../components/Fields.svelte";
   import InputField from "../../components/InputField.svelte";
+  import { onMount } from 'svelte';
 
   export let topic;
+
+  onMount(() => {MathJax.typeset();});
 </script>
 
 <svelte:head>
