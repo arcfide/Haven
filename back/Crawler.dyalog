@@ -1,10 +1,12 @@
 ﻿:Namespace Crawler
 (⎕IO ⎕ML ⎕WX)←0 1 3
 
+ prep∆pre←'\<pre ' '\<pre\>'⎕R'&xml:space="preserve" ' '<pre xml:space="preserve">'
  doc∆path←{(≢#.DOCROOT)↓⍵}
  flare∆body←{cleanse∆madcap ⍉(⊢-⊃)@0⍉⍵↓⍨⍵[;1]⍳⊂'body'}
  flare∆heading←{⊃{⍺,' ',⍵}⌿(⍵ subtree 1+⍵[;1]⍳⊂'body')[;2]~⊂''}
  fst∆node←{⍵[1+⍵[;1]⍳⊂'body';]}
+ get∆html←{⎕XML prep∆pre ⊃⎕NGET ⍵}
  keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
  strip∆fst←{(1↑⍵)⍪{⍵⌿⍨~1,∧⍀1↓⍵[;0]>⊃⍵}1↓⍵}
  subtree←{⍺⌿⍨⍵=(⍸⍺[⍵;0]≥⍺[;0])⍸⍳≢⍺}
@@ -28,14 +30,14 @@
 ∇ topics←BUILD∆FLARE store;topics;dirs
   dirs←'DotNet' 'GUI' 'InterfaceGuide' 'Language' 'MiscPages' 'UNIX_IUG' 'UserGuide'
   dirs←(#.DOCROOT,'17.1\apl_core_release_specific\Core\Content\')∘,¨dirs,¨'\'
-  topics←⊃⍪⌿parse∆flare/{⍵,⍪{⎕XML⊃⎕NGET ⍵}¨⍵}⊃⍪/walk¨dirs,¨⊂'*.htm'
+  topics←⊃⍪⌿parse∆flare/{⍵,⍪get∆html¨⍵}⊃⍪/walk¨dirs,¨⊂'*.htm'
   (topics⍪⍨⎕FREAD store 1)⎕FREPLACE store 1
 ∇
 
 ∇ topics←BUILD∆QUICKREF store;files;data;heads;bodies;summaries
   files←'17.1\apl_core_release_specific\Core\Content\Language\Language Bar\*.htm'
   files←walk #.DOCROOT,files
-  data←{⎕XML⊃⎕NGET ⍵}¨files
+  data←get∆html¨files
   heads←{⊃{⍺,' ',⍵}⌿(⍵ subtree ⍵[;1]⍳⊂'head')[;2]}¨data
   bodies←flare∆body¨data
   summaries←{'<pre>',(2⊃fst∆node ⍵),'</pre>'}¨bodies
