@@ -14,10 +14,12 @@
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
  xml∆sanity←{(,¨'&<>')⎕R'\&amp;' '\&lt;' '\&gt;'⊢⍵}
 
- cleanse∆madcap←{mc∆equation mc∆keyword ⍵}
+ cleanse∆madcap←{mc∆footnote mc∆equation mc∆keyword ⍵}
  mc∆keyword←{⍵⌿⍨~⍵[;1]∊⊂'MadCap:keyword'}
  mc∆equation←{{⍉(⊂'div')@1⊢(⊂⍉⍪'class' 'equation')@3⍉⍵}@(⍸⍵[;1]∊⊂'MadCap:equation')⊢⍵}
-
+ mc∆footnote←{i←⍸⍵[;1]∊⊂'MadCap:footnote'
+  {⍉(⊂'span')@1⊢(⊂⍉⍪'class' 'footnote')@3{' [Note: ',⍵,'] '}¨@2⍉⍵}@i⊢⍵}
+   
  parse∆flare←{good←'h2' 'h3' 'h4' 'div' 'tbl'
    body←flare∆body ⍵ ⋄ keys←keywords tree∆txt ⍵ ⋄ path←doc∆path ⍺
    (fst∆node ⍵)[1]∊good:⍉⍪path(flare∆heading ⍵)(summary body)(strip∆fst body)'doc' keys
