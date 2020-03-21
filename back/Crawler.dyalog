@@ -20,12 +20,12 @@
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
  xml∆sanity←{(,¨'&<>')⎕R'\&amp;' '\&lt;' '\&gt;'⊢⍵}
 
- cleanse∆madcap←{mc∆printonly mc∆footnote mc∆equation mc∆keyword ⍵}
- mc∆keyword←{⍵⌿⍨~⍵[;1]∊⊂'MadCap:keyword'}
- mc∆equation←{{⍉(⊂'div')@1⊢(⊂⍉⍪'class' 'equation')@3⍉⍵}@(⍸⍵[;1]∊⊂'MadCap:equation')⊢⍵}
- mc∆footnote←{i←⍸⍵[;1]∊⊂'MadCap:footnote'
-  {⍉(⊂'span')@1⊢(⊂⍉⍪'class' 'footnote')@3{' [Note: ',⍵,'] '}¨@2⍉⍵}@i⊢⍵}
- mc∆printonly←{⍵⌿⍨~⍵ sub3msk'Default.PrintOnly'∘≡¨'MadCap:conditions'∘get∆attr¨⍵[;3]}
+ cleanse∆madcap←{z←⍵
+   z←z⌿⍨~z[;1]∊⊂'MadCap:keyword'
+   z←{⍉(⊂'div')@1⊢(⊂⍉⍪'class' 'equation')@3⍉⍵}@(⍸z[;1]∊⊂'MadCap:equation')⊢z
+   i←⍸z[;1]∊⊂'MadCap:footnote'
+   z←{⍉(⊂'span')@1⊢(⊂⍉⍪'class' 'footnote')@3{' [Note: ',⍵,'] '}¨@2⍉⍵}@i⊢z
+   z←z⌿⍨~z sub3msk'Default.PrintOnly'∘≡¨'MadCap:conditions'∘get∆attr¨z[;3]}
    
  parse∆flare←{good←'h2' 'h3' 'h4' 'div' 'tbl'
    body←flare∆body ⍵ ⋄ keys←keywords tree∆txt ⍵ ⋄ path←doc∆path ⍺
