@@ -1,14 +1,18 @@
 ﻿:Namespace Crawler
 (⎕IO ⎕ML ⎕WX)←0 1 3
+ I←{(⊂⍵)⌷⍺}
 
- prep∆pre←'\<pre ' '\<pre\>'⎕R'&xml:space="preserve" ' '<pre xml:space="preserve">'
  doc∆path←{(≢#.DOCROOT)↓⍵}
  flare∆body←{cleanse∆madcap ⍉(⊢-⊃)@0⍉⍵↓⍨⍵[;1]⍳⊂'body'}
  flare∆heading←{⊃{⍺,' ',⍵}⌿(⍵ subtree 1+⍵[;1]⍳⊂'body')[;2]~⊂''}
  fst∆node←{⍵[1+⍵[;1]⍳⊂'body';]}
  get∆html←{⎕XML prep∆pre ⊃⎕NGET ⍵}
+ get∆attr←{⊃(⍵[;1],⊂'')[⍵[;0]⍳⊂⍺]}
  keywords←{(,¨⎕A)~⍨{⍵[⍋⍵]}t⊆⍨(t←ucase ⍵)∊⎕A,''''}
+ parv←{p⊣2{p[⍵]←⍺[⍺⍸⍵]}⌿⊢∘⊂⌸⍵[;0]⊣p←⍳≢⍵}
+ prep∆pre←'\<pre ' '\<pre\>'⎕R'&xml:space="preserve" ' '<pre xml:space="preserve">'
  strip∆fst←{(1↑⍵)⍪{⍵⌿⍨~1,∧⍀1↓⍵[;0]>⊃⍵}1↓⍵}
+ sub3msk←{i∊⍨(parv ⍺)I@{~⍵∊i}⍣≡⍳≢⍵⊣i←⍸⍵}
  subtree←{⍺⌿⍨⍵=(⍸⍺[⍵;0]≥⍺[;0])⍸⍳≢⍺}
  summary←{'<p>',(320↑⊃{⍺,' ',⍵}⌿⍵[;2]~⊂''),'</p>'}
  tree∆txt←{⊃{⍺,' ',⍵}⌿(⊂''),⍵[;2]~⊂''}
@@ -16,11 +20,12 @@
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
  xml∆sanity←{(,¨'&<>')⎕R'\&amp;' '\&lt;' '\&gt;'⊢⍵}
 
- cleanse∆madcap←{mc∆footnote mc∆equation mc∆keyword ⍵}
+ cleanse∆madcap←{mc∆printonly mc∆footnote mc∆equation mc∆keyword ⍵}
  mc∆keyword←{⍵⌿⍨~⍵[;1]∊⊂'MadCap:keyword'}
  mc∆equation←{{⍉(⊂'div')@1⊢(⊂⍉⍪'class' 'equation')@3⍉⍵}@(⍸⍵[;1]∊⊂'MadCap:equation')⊢⍵}
  mc∆footnote←{i←⍸⍵[;1]∊⊂'MadCap:footnote'
   {⍉(⊂'span')@1⊢(⊂⍉⍪'class' 'footnote')@3{' [Note: ',⍵,'] '}¨@2⍉⍵}@i⊢⍵}
+ mc∆printonly←{⍵⌿⍨~⍵ sub3msk'Default.PrintOnly'∘≡¨'MadCap:conditions'∘get∆attr¨⍵[;3]}
    
  parse∆flare←{good←'h2' 'h3' 'h4' 'div' 'tbl'
    body←flare∆body ⍵ ⋄ keys←keywords tree∆txt ⍵ ⋄ path←doc∆path ⍺
