@@ -25,7 +25,7 @@
    z←{⍉(⊂'div')@1⊢(⊂⍉⍪'class' 'equation')@3⍉⍵}@(⍸z[;1]∊⊂'MadCap:equation')⊢z
    i←⍸z[;1]∊⊂'MadCap:footnote'
    z←{⍉(⊂'span')@1⊢(⊂⍉⍪'class' 'footnote')@3{' [Note: ',⍵,'] '}¨@2⍉⍵}@i⊢z
-   x←'Default.PrintOnly' 'Default.XRefShort' 'InterfaceGuide.IsIG'
+   x←'Default.PrintOnly' 'Default.XRefShort' 'InterfaceGuide.IsIG' 'Default.RelNotesOnly'
    z←z⌿⍨~z sub3msk x∊⍨'MadCap:conditions'∘get∆attr¨z[;3]
    (m⌿z)[;1 3]←(m←z[;1]∊⊂'MadCap:conditionalText')⌿⍉⍪'span'(0 2⍴⍬)
    z}
