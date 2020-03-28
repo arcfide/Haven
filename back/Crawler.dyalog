@@ -17,6 +17,7 @@
  summary←{'<p>',(320↑⊃{⍺,' ',⍵}⌿⍵[;2]~⊂''),'</p>'}
  tree∆txt←{⊃{⍺,' ',⍵}⌿(⊂''),⍵[;2]~⊂''}
  ucase←{1(819⌶)⍵}
+ read∆uri←{⍺←'.' ⋄ ⊃⎕NGET(⊃⎕NPARTS ⍺)⍪⍵}
  walk←{⍺←1 ⋄ ⊃(⎕NINFO⍠('Wildcard' 1)('Recurse'⍺))⍵}
  xml∆sanity←{(,¨'&<>')⎕R'\&amp;' '\&lt;' '\&gt;'⊢⍵}
 
